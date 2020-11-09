@@ -3,9 +3,29 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="#">
+        <link rel="stylesheet" href="style.css">
         <title>Rock Paper Scissors</title>
     </head>
     <body>
+        <h1> Rock Paper Scissors</h1>
+        <button id="start" value="true">Let's play</button>
+        <p id="result">First to win 5 times is the <strong>WINNER</strong></p>
+        <div id="score-container">
+            <p class="score">Player: <span id="player"></span></p>
+            <p class="score">PC: <span id="pc"></span></p>
+        </div>
+        <div id="container">
+            <div class="card">
+                <img alt="Rock" src="https://www.flaticon.com/svg/static/icons/svg/500/500351.svg">
+            </div>
+            <div class="card">
+                <img alt="Paper" src="https://www.flaticon.com/svg/static/icons/svg/503/503414.svg">
+            </div>
+            <div class="card">
+                <img alt="Scissors" src="https://www.flaticon.com/svg/static/icons/svg/715/715762.svg">
+            </div>
+        </div>
         <script src="script.js"></script>
     </body>
 </html>

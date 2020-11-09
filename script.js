@@ -1,66 +1,69 @@
 
-let options = ['Rock', 'Paper', 'Scissors'];
-/*
-    so begin with a function called computerPlay that will randomly return
-    either ‘Rock’, ‘Paper’ or ‘Scissors’.
-*/
+const OPTIONS = ['Rock', 'Paper', 'Scissors'];
+let score = [0, 0];
+let click = false;
 
 function computerPlay(){
     let index = Math.floor(Math.random() * 3);
-    return options[index];
+    return OPTIONS[index];
 }
 
-/*
-    Write a function that plays a single round of Rock Paper Scissors. The function should
-    take two parameters - the playerSelection and computerSelection - and then return a
-    string that declares the winner of the round like so: "You Lose! Paper beats Rock"
-*/
-
-function playRound(player, computer, score){
+function playRound(player, computer){
+    if(!player) return;
+    let para = document.querySelector('#result');
     if(player === computer){
-        return `It's a Tie! ${player} and ${computer} are equal.`; 
+        para.textContent = `It's a Tie! ${player} and ${computer} are equal.`; 
     }
     else if( (player.length > computer.length) || (player === 'Rock' && computer === 'Scissors') ){
         score[0] += 1;
-        return `You Win! ${player} beats ${computer}.`;
+        document.querySelector('#player').textContent = score[0];
+        para.textContent = `You Win! ${player} beats ${computer}.`;
+        getWinner();
     }
     else {
         score[1] += 1;
-        return `You Lose! ${computer} beats ${player}.`;
+        document.querySelector('#pc').textContent = score[1];
+        para.textContent = `You Lose! ${computer} beats ${player}.`;
+        getWinner();
     }
 }
 
-
-function validMove(move){
-    for(let i = 0; i < options.length; i++){
-        if(move === options[i]){
-            return true;
+function getWinner(){
+    if(score[0] > 4 || score[1] > 4){
+        let para = document.querySelector('#result');
+        if(score[0] > score[1]){
+            para.textContent = 'You won! Congratulations!';
         }
-    }
-    return false;
-}
-
-function game(){
-    let score = [0, 0];
-    for(let i = 0; i < 5; i++){
-        let playerSelection;
-        do{
-            playerSelection = prompt("--- Let's play Rock, Paper, Scissors ---\n--- Make your move: ").toLowerCase();
-            playerSelection = playerSelection[0].toUpperCase() + playerSelection.slice(1);
+        else{
+            para.textContent = 'You Lose! But you are Awesome anyway!';
         }
-        while(!validMove(playerSelection));
-        let computerSelection = computerPlay();
-        console.log(playRound(playerSelection, computerSelection, score));
+        let start = document.querySelector('#start');
+        start.textContent = 'Play Again';
+        start.style.display = 'block';
     }
-    if(score[0] > score[1]){
-        alert(`You won! Congratulations!\nPlayer: ${score[0]}\nComputer: ${score[1]}`);
-    }
-    else if(score[1] > score[0]){
-        alert(`You Lose! But you are Awesome anyway!\nPlayer: ${score[0]}\nComputer: ${score[1]}`);
-    }
-    else{
-        alert(`It's a Tie!\nPlayer: ${score[0]}\nComputer: ${score[1]}`);
+    return;
+}
+
+function game(e){
+    score[0] = 0;
+    score[1] = 0;
+    document.querySelector('#player').textContent = score[0];
+    document.querySelector('#pc').textContent = score[1];
+
+    e.target.style.display = 'none';
+    if(!click){
+        let cards = Array.from(document.querySelectorAll('.card'));
+        cards.forEach(card => card.addEventListener('click', (e)=>{
+            if(score[0] < 5 && score[1] < 5){ 
+                let playerMove = e.target.alt;
+                let computerSelection = computerPlay();
+                playRound(playerMove, computerSelection, score);
+            }
+            return;
+        }));
+        click = true;
     }
 }
 
-game();
+let start = document.querySelector('#start');
+start.addEventListener('click', game);

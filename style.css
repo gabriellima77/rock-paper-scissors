@@ -50,7 +50,7 @@ h1 {
 
 #score-container {
     display: flex;
-    width: 80vw;
+    width: 60vw;
     margin: 0 auto;
     justify-content: space-between;
 }
@@ -58,6 +58,7 @@ h1 {
 .score {
     display: block;
     font-size: 2.5rem;
+    color: #353535;
 }
 
 .card {

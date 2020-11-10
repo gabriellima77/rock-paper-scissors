@@ -17,7 +17,7 @@ function playRound(player, computer){
     else if( (player.length > computer.length) || (player === 'Rock' && computer === 'Scissors') ){
         score[0] += 1;
         document.querySelector('#player').textContent = score[0];
-        para.textContent = `You Win! ${player} beats ${computer}.`;
+        para.textContent = `You Won! ${player} beats ${computer}.`;
         getWinner();
     }
     else {

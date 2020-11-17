@@ -14,7 +14,8 @@ function playRound(player, computer){
     if(player === computer){
         para.textContent = `It's a Tie! ${player} and ${computer} are equal.`; 
     }
-    else if( (player.length > computer.length) || (player === 'Rock' && computer === 'Scissors') ){
+    else if( (player === 'Paper' && computer === 'Rock')  || (player === 'Rock' && computer === 'Scissors')
+            || (player === 'Scissors' && computer === 'Paper')){
         score[0] += 1;
         document.querySelector('#player').textContent = score[0];
         para.textContent = `You Won! ${player} beats ${computer}.`;
